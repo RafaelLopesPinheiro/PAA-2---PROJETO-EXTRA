@@ -1,0 +1,213 @@
+================================================================================
+RELATÓRIO TÉCNICO - VRPTW COM ALGORITMO GENÉTICO HÍBRIDO
+================================================================================
+
+Autor: Rafael Lopes Pinheiro
+Data: 2025-11-18 13:06:05
+GitHub: @RafaelLopesPinheiro
+
+================================================================================
+1. REFERÊNCIA DO ARTIGO
+================================================================================
+
+Título: Research on Vehicle Routing Problem with Time Windows
+        Based on Improved Genetic Algorithm
+Autores: Não especificado no prompt (artigo de 2025)
+Fonte: MDPI Electronics, 2025
+DOI: https://doi.org/10.3390/electronics14040647
+
+================================================================================
+2. DESCRIÇÃO DO PROBLEMA
+================================================================================
+
+O Vehicle Routing Problem with Time Windows (VRPTW) é um problema
+clássico de otimização combinatória classificado como NP-difícil.
+
+Objetivo:
+  Minimizar a distância total percorrida por uma frota de veículos
+  para atender todos os clientes, respeitando:
+    • Capacidade dos veículos
+    • Janelas de tempo de cada cliente
+    • Tempo máximo de rota
+
+================================================================================
+3. ALGORITMOS IMPLEMENTADOS
+================================================================================
+
+3.1. Heurística de Inserção de Solomon (I1)
+--------------------------------------------------------------------------------
+Heurística construtiva gulosa que:
+  1. Seleciona cliente inicial (mais distante do depot)
+  2. Insere clientes usando critério de custo c(i,u,j):
+     c(i,u,j) = α·c1(i,u,j) + λ·c2(i,u,j)
+     onde:
+       c1 = custo de distância adicional
+       c2 = custo temporal (urgência)
+  3. Repete até não ser possível inserir mais clientes
+
+3.2. Algoritmo Genético Híbrido
+--------------------------------------------------------------------------------
+Componentes principais:
+
+a) Representação:
+   • Cromossomo = sequência de clientes agrupados em rotas
+
+b) Inicialização:
+   • 30% - Heurística de Solomon com parâmetros variados
+   • 40% - Construção aleatória gulosa
+   • 30% - Mutações da melhor solução
+
+c) Operadores Genéticos:
+   • Seleção: Torneio (tamanho 5)
+   • Crossover: Order Crossover (OX)
+   • Mutação: Swap, Insertion, Inversion
+
+d) Busca Local:
+   • 2-opt intra-rota
+
+e) Estratégias Avançadas:
+   • Elitismo
+   • Reinicialização adaptativa (estagnação > 50 gerações)
+
+================================================================================
+4. ANÁLISE DE COMPLEXIDADE
+================================================================================
+
+4.1. Heurística de Solomon
+--------------------------------------------------------------------------------
+Complexidade de Tempo: O(n³)
+  onde n = número de clientes
+
+Justificativa:
+  • Para cada veículo: O(n)
+  • Para cada cliente não roteado: O(n)
+  • Teste de inserção em cada posição: O(n)
+  • Total: O(n) × O(n) × O(n) = O(n³)
+
+4.2. Algoritmo Genético
+--------------------------------------------------------------------------------
+Complexidade de Tempo: O(G × P × n²)
+  onde:
+    G = número de gerações
+    P = tamanho da população
+    n = número de clientes
+
+Justificativa:
+  • Avaliação de fitness: O(n) por solução
+  • Crossover (OX): O(n) por operação
+  • Mutação: O(1) por operação
+  • Busca local 2-opt: O(n²) por solução
+  • Por geração: P × O(n²)
+  • Total: G × P × O(n²)
+
+================================================================================
+5. INSTÂNCIA DO PROBLEMA
+================================================================================
+
+Nome: FoodDelivery_Center13_40customers
+Número de Clientes: 40
+Número de Veículos: 10
+Capacidade dos Veículos: 50.00
+
+Demanda Total: 377.75
+Janela de Tempo do Depot: [0.0, 480.0]
+
+================================================================================
+6. PARÂMETROS DOS ALGORITMOS
+================================================================================
+
+6.1. Heurística de Solomon
+--------------------------------------------------------------------------------
+  alpha: 1.0
+  mu: 1.0
+  lambda_param: 2.0
+
+6.2. Algoritmo Genético
+--------------------------------------------------------------------------------
+  pop_size: 100
+  elite_size: 20
+  generations: 300
+  crossover_rate: 0.8
+  mutation_rate: 0.2
+  local_search_rate: 0.3
+  seed: 42
+
+================================================================================
+7. RESULTADOS EXPERIMENTAIS
+================================================================================
+
+7.1. Solução Inicial (Solomon)
+--------------------------------------------------------------------------------
+  Distância Total: 808.44
+  Tempo Total: 1997.37
+  Número de Veículos: 10
+  Fitness: 10808.44
+  Factível: True
+
+7.2. Solução Otimizada (Algoritmo Genético)
+--------------------------------------------------------------------------------
+  Distância Total: 423.26
+  Tempo Total: 1570.70
+  Número de Veículos: 8
+  Fitness: 8423.26
+  Factível: True
+
+7.3. Melhorias Obtidas
+--------------------------------------------------------------------------------
+  Redução de Distância: 47.65%
+  Redução de Veículos: 2
+  Melhoria de Fitness: 22.07%
+
+7.4. Análise de Convergência
+--------------------------------------------------------------------------------
+  Gerações executadas: 300
+  Fitness inicial: 9513.82
+  Fitness final: 8423.26
+  Melhoria total: 11.46%
+
+================================================================================
+8. CONCLUSÕES
+================================================================================
+
+8.1. Resultados Alcançados
+--------------------------------------------------------------------------------
+  ✓ Implementação bem-sucedida do algoritmo do artigo
+  ✓ Heurística de Solomon gera soluções iniciais viáveis
+  ✓ Algoritmo Genético melhora significativamente a solução
+  ✓ Redução de 47.65% na distância total
+
+8.2. Contribuições da Implementação
+--------------------------------------------------------------------------------
+  • Conversão de dados reais de vendas em problema VRPTW
+  • Implementação completa em Python (sem dependências pesadas)
+  • Operadores genéticos adaptados para VRPTW
+  • Estratégia de reinicialização para evitar convergência prematura
+  • Visualizações detalhadas para análise de resultados
+
+8.3. Trabalhos Futuros
+--------------------------------------------------------------------------------
+  • Testar em instâncias benchmark (Solomon, Gehring & Homberger)
+  • Implementar operadores de crossover adicionais (PMX, CX)
+  • Adicionar busca local inter-rota (relocate, exchange)
+  • Paralelização do algoritmo genético
+  • Otimização multi-objetivo (distância vs. número de veículos)
+
+================================================================================
+9. REFERÊNCIAS
+================================================================================
+
+[1] Electronics (2025). Research on Vehicle Routing Problem with
+    Time Windows Based on Improved Genetic Algorithm.
+    MDPI. https://doi.org/10.3390/electronics14040647
+
+[2] Solomon, M. M. (1987). Algorithms for the vehicle routing and
+    scheduling problems with time window constraints.
+    Operations Research, 35(2), 254-265.
+
+[3] Bräysy, O., & Gendreau, M. (2005). Vehicle routing problem
+    with time windows, Part I: Route construction and local search
+    algorithms. Transportation Science, 39(1), 104-118.
+
+================================================================================
+FIM DO RELATÓRIO
+================================================================================

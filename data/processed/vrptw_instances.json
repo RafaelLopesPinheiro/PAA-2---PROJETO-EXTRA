@@ -1,0 +1,43 @@
+{
+  "name": "Sales_VRPTW",
+  "num_vehicles": 3,
+  "vehicle_capacity": 250.0,
+  "depot": {
+    "id": 0,
+    "x": 50.0,
+    "y": 50.0,
+    "demand": 0.0,
+    "ready_time": 0.0,
+    "due_time": 480.0,
+    "service_time": 0.0
+  },
+  "customers": [
+    {
+      "id": 1,
+      "x": 39.963209507789,
+      "y": 86.05714451279329,
+      "demand": 50,
+      "ready_time": 87.83927301736861,
+      "due_time": 375.5978001728352,
+      "service_time": 20.0
+    },
+    {
+      "id": 2,
+      "x": 22.48149123539492,
+      "y": 22.479561626896214,
+      "demand": 50,
+      "ready_time": 6.970033460183935,
+      "due_time": 342.88173969967227,
+      "service_time": 20.0
+    },
+    {
+      "id": 3,
+      "x": 58.0892009394567,
+      "y": 66.64580622368364,
+      "demand": 50,
+      "ready_time": 2.4701393154962936,
+      "due_time": 357.05391270465526,
+      "service_time": 20.0
+    }
+  ]
+}
