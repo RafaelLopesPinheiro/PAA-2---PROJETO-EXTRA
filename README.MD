@@ -1,40 +1,50 @@
 # Vehicle Routing Problem with Time Windows - Genetic Algorithm
 
-## 📋 Descrição do Projeto
+## 📋 Descrição
 
-Implementação de um **Algoritmo Genético Híbrido** para resolver o **Vehicle Routing Problem with Time Windows (VRPTW)**, baseado no artigo científico:
+Implementação de um **Algoritmo Genético Híbrido** para resolver o **Vehicle Routing Problem with Time Windows (VRPTW)**, otimizando rotas de entrega com restrições de capacidade e janelas de tempo.
 
-> **"Research on Vehicle Routing Problem with Time Windows Based on Improved Genetic Algorithm"**  
-> MDPI Electronics, 2025  
-> DOI: https://doi.org/10.3390/electronics14040647
+**Baseado em:** "Research on Vehicle Routing Problem with Time Windows Based on Improved Genetic Algorithm" (MDPI Electronics, 2025)
 
-### 🎯 Objetivo
+## 🎯 Objetivo
 
-Minimizar a distância total percorrida por uma frota de veículos para atender todos os clientes, respeitando:
+Minimizar a distância total percorrida por uma frota de veículos respeitando:
 - Capacidade dos veículos
-- Janelas de tempo de cada cliente
+- Janelas de tempo dos clientes
 - Tempo máximo de rota
 
----
+## 🧬 Implementação
 
-## 🧬 Algoritmos Implementados
+### Heurística de Solomon (I1)
+Construção gulosa de solução inicial baseada em critérios de distância e urgência temporal.
 
-### 1. Heurística de Inserção de Solomon (I1)
-- Construção gulosa de solução inicial
-- Critério de inserção baseado em custo de distância e urgência temporal
-- **Complexidade:** O(n³)
-
-### 2. Algoritmo Genético Híbrido
-- **Representação:** Sequência de clientes agrupados em rotas
-- **Inicialização:** Solomon + Construção Aleatória + Mutações
+### Algoritmo Genético Híbrido
+- **Inicialização:** Solomon + construção aleatória gulosa + mutações
 - **Seleção:** Torneio (tamanho 5)
-- **Crossover:** Order Crossover (OX)
-- **Mutação:** Swap, Insertion, Inversion
-- **Busca Local:** 2-opt intra-rota
-- **Estratégias:** Elitismo + Reinicialização Adaptativa
-- **Complexidade:** O(G × P × n²)
+- **Crossover:** Best Route Crossover (específico para VRP)
+- **Mutação:** Relocate, Exchange, 2-opt intra e inter-rotas
+- **Estratégias:** Elitismo + reinicialização adaptativa
 
----
+## 📊 Datasets
 
-## 📁 Estrutura do Projeto
-VRPTW-Genetic-Algorithm/ ├── data/ │ ├── raw/ │ │ └── sales_data.csv # Dados de entrada │ └── processed/ │ └── vrptw_instances.json # Instância VRPTW gerada ├── src/ │ ├── utils.py # Funções utilitárias │ ├── heuristics.py # Heurística de Solomon │ ├── genetic_algorithm.py # Algoritmo Genético │ └── visualization.py # Visualizações ├── results/ │ ├── solutions/ # Soluções em JSON │ ├── plots/ # Gráficos gerados │ └── report.txt # Relatório técnico ├── main.py # Pipeline principal ├── requirements.txt # Dependências └── README.md # Este arquivo
+- **Food Delivery Dataset** (Kaggle - AV Genpact Hack Dec 2018)
+- **Solomon Benchmarks** (C101, R101, RC101, etc.)
+
+## 🚀 Execução
+
+```bash
+python main.py
+```
+
+## 📁 Estrutura
+
+```
+├── data/               # Dados de entrada e instâncias VRPTW
+├── src/                # Código-fonte (utils, heuristics, GA, visualization)
+├── results/            # Soluções, gráficos e relatórios
+└── main.py             # Pipeline principal
+```
+
+## 📈 Resultados
+
+O algoritmo genético consistentemente melhora a solução inicial de Solomon, reduzindo distância total e número de veículos utilizados.
