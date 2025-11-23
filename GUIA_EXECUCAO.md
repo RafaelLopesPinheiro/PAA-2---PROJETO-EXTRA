@@ -7,6 +7,37 @@
 
 ---
 
+## 🎯 EXECUÇÃO RÁPIDA PARA O PROFESSOR
+
+### ⚡ Método 1: Notebook Interativo (RECOMENDADO)
+
+O notebook `GUIA_COMPLETO_EXECUCAO.ipynb` contém **tudo pronto para execução**:
+
+1. **Abra o arquivo** `GUIA_COMPLETO_EXECUCAO.ipynb` no VS Code ou Jupyter
+2. **Execute todas as células** sequencialmente (Run All ou Shift + Enter)
+3. **Não precisa baixar dados externos** - usa dataset Food Delivery incluído no projeto
+
+✅ **Vantagens:**
+- Código executável célula por célula
+- Documentação completa de parâmetros e saídas
+- Visualizações interativas das rotas
+- Comparações entre algoritmos
+- Exemplos de variação de entrada
+
+### ⚡ Método 2: Execução via Terminal
+
+```powershell
+# 1. Instale as dependências
+pip install -r requirements.txt
+
+# 2. Execute o programa principal
+python main.py
+```
+
+**Observação:** O dataset Food Delivery (`data/raw/food_delivery/train.csv`) já está incluído no repositório.
+
+---
+
 ## 📋 SUMÁRIO
 
 1. [Como Executar o Projeto](#1-como-executar-o-projeto)
@@ -26,51 +57,38 @@
 - pip (gerenciador de pacotes Python)
 - Git (opcional, para clonar o repositório)
 
-### 1.2. Instalação
+### 1.2. Instalação Simples
 
 ```powershell
 # 1. Clone o repositório (ou baixe o ZIP)
 git clone https://github.com/RafaelLopesPinheiro/PAA-2---PROJETO-EXTRA.git
-cd PAA-2---PROJETO-EXTRA
+cd "PAA 2 - PROJETO EXTRA"
 
-# 2. Crie um ambiente virtual
-python -m venv .venv
-
-# 3. Ative o ambiente virtual
-.venv\Scripts\Activate.ps1   # Windows PowerShell
-# OU
-.venv\Scripts\activate.bat    # Windows CMD
-# OU
-source .venv/bin/activate     # Linux/Mac
-
-# 4. Atualize pip e ferramentas de build
-python -m pip install --upgrade pip setuptools wheel
-
-# 5. Instale as dependências
+# 2. Instale as dependências
 pip install -r requirements.txt
 ```
 
-### 1.3. Download dos Dados (OBRIGATÓRIO)
+**Observação:** Os dados do Food Delivery já estão incluídos em `data/raw/food_delivery/train.csv`
 
-O projeto usa dados reais de delivery do Kaggle:
+### 1.3. Formas de Executar
 
-1. Acesse: https://www.kaggle.com/datasets/ghoshsaptarshi/av-genpact-hack-dec2018
-2. Faça login no Kaggle (ou crie conta gratuita)
-3. Clique em "Download" para baixar o dataset
-4. Extraia o arquivo `train.csv`
-5. Coloque em: `data/raw/food_delivery/train.csv`
+#### Opção 1: Notebook Interativo (RECOMENDADO PARA DEMONSTRAÇÃO)
 
-**Estrutura esperada:**
-```
-data/
-└── raw/
-    └── food_delivery/
-        ├── train.csv        ← ARQUIVO NECESSÁRIO
-        ├── test.csv         (opcional)
-        └── sample_sub.csv   (opcional)
+```powershell
+# Abra o notebook no VS Code ou Jupyter
+# Arquivo: GUIA_COMPLETO_EXECUCAO.ipynb
+
+# Execute célula por célula (Shift + Enter) ou Run All
 ```
 
-### 1.4. Execução do Programa Principal
+**✅ Este notebook contém:**
+- ✅ Documentação completa de parâmetros
+- ✅ Exemplos executáveis de uso
+- ✅ Visualizações das rotas
+- ✅ Comparações entre algoritmos
+- ✅ Demonstração de variação de entrada
+
+#### Opção 2: Programa Principal (Terminal)
 
 ```powershell
 # Execute o programa principal
@@ -79,13 +97,19 @@ python main.py
 
 **Tempo de execução esperado:** 5-15 minutos (dependendo do hardware)
 
-### 1.5. Execução do Notebook (Alternativa Interativa)
+#### Opção 3: Importar como Módulo
 
-```powershell
-# Abra o Jupyter Notebook no VS Code ou Jupyter Lab
-# Arquivo: VRPTW_Complete_Project.ipynb
+```python
+from src.heuristics import SolomonInsertion
+from src.genetic_algorithm import ImprovedGeneticAlgorithm
+from src.food_delivery_loader import load_food_delivery_instance
 
-# Execute as células sequencialmente (Shift + Enter)
+# Carregar dados
+instance = load_food_delivery_instance(max_customers=15)
+
+# Executar algoritmo
+solomon = SolomonInsertion(instance)
+vehicles = solomon.construct_solution()
 ```
 
 ---

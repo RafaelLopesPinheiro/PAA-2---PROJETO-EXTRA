@@ -1,0 +1,26 @@
+
+RELATÓRIO DE EXECUÇÃO - VRPTW
+==============================
+Data: 2025-11-23 16:56:56
+Instância: Food Delivery (15 clientes)
+
+HEURÍSTICA DE SOLOMON I1
+------------------------
+Número de Veículos: 7
+Distância Total: 354.62
+Tempo de Execução: 0.00s
+Válida: Sim
+
+ALGORITMO GENÉTICO
+------------------
+Número de Veículos: 6
+Distância Total: 269.11
+Tempo de Execução: 29.05s
+Válida: Sim
+População: 50
+Gerações: 100
+
+COMPARAÇÃO
+----------
+Melhor Algoritmo: GA
+Diferença de Distância: 85.52
