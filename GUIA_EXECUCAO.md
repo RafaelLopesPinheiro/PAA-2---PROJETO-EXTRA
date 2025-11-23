@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 EXECUÇÃO RÁPIDA PARA O PROFESSOR
+## 🎯 EXECUÇÃO RÁPIDA
 
 ### ⚡ Método 1: Notebook Interativo (RECOMENDADO)
 
